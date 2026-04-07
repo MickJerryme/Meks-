@@ -3,146 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mick Jerryme Mhier M Varona | Portfolio</title>
+<title>Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-html { scroll-behavior: smooth; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Inter',sans-serif; background:#000; color:#fff; }
-
-/* Navbar */
-nav{ position:fixed; width:100%; top:0; padding:10px 28px; display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; border-bottom:1px solid #1a1a1a; z-index:1000; }
-nav h1{ font-family:'Orbitron',sans-serif; font-size:15px; }
-nav ul{ list-style:none; display:flex; gap:16px; }
-nav ul li a{ text-decoration:none; font-size:12px; color:#bbb; }
-nav ul li a:hover{ color:#fff; }
-
-/* Sections */
-section{ padding:90px 28px 40px; max-width:850px; margin:auto; }
-h2{ font-family:'Orbitron',sans-serif; font-size:17px; margin-bottom:12px; }
-
-/* Hero */
-.hero{ padding-top:110px; }
-.hero h2{ font-size:20px; }
-
-/* About Cards */
-.container{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
-.card{ background:#0f0f0f; padding:14px; border-radius:6px; border:1px solid #1f1f1f; }
-.card h3{ font-size:13px; margin-bottom:5px; }
-.card p{ font-size:11px; color:#aaa; }
-
-/* Academic Section */
-.academic-box{ background:#0d0d0d; padding:16px; border-radius:8px; border:1px solid #1f1f1f; }
-details{ background:#121212; margin-bottom:10px; padding:10px; border-radius:6px; border:1px solid #1f1f1f; }
-summary{ font-size:13px; font-weight:500; cursor:pointer; }
-.content-area{ margin-top:8px; font-size:11px; color:#aaa; line-height:1.6; min-height:60px; border:1px dashed #333; padding:8px; border-radius:6px; }
-.content-area.dragover{ border:2px dashed #fff; }
-.content-area img{ max-width:100%; margin-top:8px; border-radius:6px; border:1px solid #222; }
-
-/* Footer */
-footer{ text-align:center; padding:10px; font-size:11px; color:#666; border-top:1px solid #1a1a1a; margin-top:25px; }
-
-@media(max-width:600px){
-  nav{padding:10px 15px;}
-  section{padding:80px 15px 30px;}
-}
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+body{background: linear-gradient(135deg,#000000 0%,#1a0000 40%,#660000 70%,#ff1a1a 100%); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px;}
+nav{width:100%; max-width:1200px; display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;}
+nav h2{color:white;}
+nav ul{list-style:none; display:flex; gap:30px;}
+nav ul li{color:white; cursor:pointer; transition:0.3s;}
+nav ul li:hover{color:#ff4d4d;}
+.page{display:none;}
+.active{display:block; width:100%;}
+.top-section{max-width:1200px; text-align:center; margin:auto; margin-bottom:40px;}
+.top-section h1{color:white; font-size:48px; margin-bottom:20px;}
+.tags{display:flex; justify-content:center; flex-wrap:wrap; gap:10px;}
+.tag{background:white; color:#b30000; padding:6px 14px; border-radius:20px; font-size:13px;}
+.card{width:100%; max-width:1000px; background:white; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.5); display:flex; flex-wrap:wrap; overflow:hidden;}
+.card-left{flex:1; min-width:250px; background:#111; display:flex; justify-content:center; align-items:center; padding:30px;}
+.profile-pic{width:160px; height:160px; border-radius:50%; border:5px solid white; object-fit:cover;}
+.card-right{flex:2; padding:30px;}
+.card-right h1{margin-bottom:15px;}
+.info{margin-bottom:10px;}
+.info span{font-weight:600; color:#b30000;}
+.about{margin-top:20px; background:#ffe6e6; padding:15px; border-radius:10px;}
+.section{background:white; padding:30px; border-radius:20px; box-shadow:0 15px 30px rgba(0,0,0,0.5); margin:20px auto; max-width:1100px;}
+.section h2{color:#b30000; margin-bottom:20px;}
+button{background:#cc0000; color:white; padding:10px; border:none; border-radius:8px; cursor:pointer;}
+button:hover{background:#ff1a1a;}
+form{display:flex; flex-direction:column; gap:10px;}
+input{padding:10px; border-radius:8px; border:1px solid #ccc;}
+#imageContainer{display:flex; flex-wrap:wrap; gap:15px;}
+#imageContainer div{display:flex; flex-direction:column; align-items:center;}
+#imageContainer img{width:140px; border-radius:10px;}
+footer{color:white; margin-top:30px;}
 </style>
 </head>
+
 <body>
 
 <nav>
-  <h1>Mick Varona</h1>
+  <h2>Portfolio</h2>
   <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#academics">Academics</a></li>
+    <li onclick="showPage('home')">Home</li>
+    <li onclick="showPage('dashboard')">Dashboard</li>
+    <li onclick="showPage('uploadMenu')">Upload</li>
   </ul>
 </nav>
 
-<section id="home" class="hero">
-  <h2>Hello, I'm Mick Jerryme Mhier M Varona</h2>
-</section>
-
-<section id="about">
-  <h2>About Me</h2>
-  <div class="container">
-    <div class="card">
-      <h3>Skills</h3>
-      <p>HTML, CSS and layout design.</p>
-    </div>
-    <div class="card">
-      <h3>Interests</h3>
-      <p>Basketball, learning new things, and technology.</p>
-    </div>
-    <div class="card">
-      <h3>Goal</h3>
-      <p>To finish college.</p>
+<div id="home" class="page active">
+  <div class="top-section">
+    <h1>student <span>portfolio</span></h1>
+    <div class="tags">
+      <div class="tag">Listener</div>
+      <div class="tag">Eager</div>
+      <div class="tag">Teamwork</div>
+      <div class="tag">HTML</div>
+      <div class="tag">CSS</div>
+      <div class="tag">Java</div>
     </div>
   </div>
-</section>
 
-<section id="academics">
-  <h2>Academic Works</h2>
-  <div class="academic-box">
+  <div class="card">
+    <div class="card-left">
+      <img src="vb5.jpg.jpg" class="profile-pic">
+    </div>
 
-    <details>
-      <summary>Quizzes</summary>
-      <div class="content-area" contenteditable="true">Add your quiz descriptions here. Drag and drop images below:</div>
-    </details>
-
-    <details>
-      <summary>Activities</summary>
-      <div class="content-area" contenteditable="true">Add your activities here. Drag and drop images below:</div>
-    </details>
-
-    <details>
-      <summary>Exams</summary>
-      <div class="content-area" contenteditable="true">Add your exam details here. Drag and drop images below:</div>
-    </details>
-
+    <div class="card-right">
+      <h1>Hello Good Day!</h1>
+      <div class="info"><span>Name:</span> Mick Jerryme Mhier M. Varona</div>
+      <div class="info"><span>Student No:</span> 251100192</div>
+      <div class="info"><span>Course & Section:</span> BSCS-1D</div>
+      <div class="about">
+        I want to be a fully pledge developer in the future
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
-<footer>
-  © 2026 Mick Jerryme Mhier M Varona | BSCS-1D
-</footer>
+<div id="dashboard" class="page">
+  <div class="section">
+    <h2>Dashboard</h2>
+    <canvas id="scoreChart" style="width:100%;max-width:900px;height:400px;"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>Uploaded Proof</h2>
+    <div id="imageContainer"></div>
+  </div>
+</div>
+
+<div id="uploadMenu" class="page">
+  <div class="section">
+    <h2>Upload</h2>
+    <button onclick="showPage('quizPage')">Quiz Upload</button><br><br>
+    <button onclick="showPage('labPage')">Lab Work Upload</button><br><br>
+    <button onclick="showPage('examPage')">Major Exam Upload</button>
+  </div>
+</div>
+
+<div id="quizPage" class="page">
+  <div class="section">
+    <h2>Quiz Upload</h2>
+    <form id="quizForm">
+      <input type="text" placeholder="Quiz Title" required>
+      <input type="file" required>
+      <input type="file" accept="image/*" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div id="labPage" class="page">
+  <div class="section">
+    <h2>Lab Work Upload</h2>
+    <form id="labForm">
+      <input type="text" placeholder="Title / Description" required>
+      <input type="file" required>
+      <input type="file" accept="image/*" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div id="examPage" class="page">
+  <div class="section">
+    <h2>Major Exam Upload</h2>
+    <form id="examForm">
+      <input type="text" placeholder="Exam Title" required>
+      <input type="file" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-// Drag & drop image upload
-document.querySelectorAll('.content-area').forEach(area => {
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  if(pageId==='dashboard'){ updateDashboard(); }
+}
 
-  area.addEventListener('dragover', e => {
+function saveUpload(formId,type){
+  document.getElementById(formId).addEventListener('submit',function(e){
     e.preventDefault();
-    area.classList.add('dragover');
+    let title=this.querySelector('input[type=text]').value;
+    let imageFile=this.querySelectorAll('input[type=file]')[1]?.files[0];
+    let reader=new FileReader();
+    reader.onload=()=>{
+      let imageData=reader.result;
+      let score=prompt('Enter score:');
+      let total=prompt('Enter total:');
+      let data=JSON.parse(localStorage.getItem('records'))||[];
+      data.push({type,title,score:Number(score),total:Number(total),image:imageData});
+      localStorage.setItem('records',JSON.stringify(data));
+      alert(type+' saved!');
+      this.reset();
+    };
+    if(imageFile) reader.readAsDataURL(imageFile);
   });
+}
 
-  area.addEventListener('dragleave', e => {
-    e.preventDefault();
-    area.classList.remove('dragover');
-  });
+saveUpload('quizForm','Quiz');
+saveUpload('labForm','Activity');
+saveUpload('examForm','Exam');
 
-  area.addEventListener('drop', e => {
-    e.preventDefault();
-    area.classList.remove('dragover');
+function deleteItem(index){
+  let data=JSON.parse(localStorage.getItem('records'))||[];
+  data.splice(index,1);
+  localStorage.setItem('records',JSON.stringify(data));
+  updateDashboard();
+}
 
-    const files = e.dataTransfer.files;
-    for(let file of files){
-      if(file.type.startsWith('image/')){
-        const reader = new FileReader();
-        reader.onload = function(ev){
-          const img = document.createElement('img');
-          img.src = ev.target.result;
-          area.appendChild(img);
-        }
-        reader.readAsDataURL(file);
-      }
+function updateDashboard(){
+  let data=JSON.parse(localStorage.getItem('records'))||[];
+  let container=document.getElementById('imageContainer');
+  container.innerHTML='';
+  let labels=[],scores=[];
+  data.forEach((item,index)=>{
+    if(item.type==='Activity' && index===data.findIndex(d=>d.type==='Activity')) return;
+    if(item.image){
+      let box=document.createElement('div');
+      let img=document.createElement('img');
+      img.src=item.image;
+      let label=document.createElement('p');
+      label.innerText=item.title;
+      label.style.textAlign='center';
+      let btn=document.createElement('button');
+      btn.innerText='Delete';
+      btn.onclick=()=>deleteItem(index);
+      box.appendChild(img);
+      box.appendChild(label);
+      box.appendChild(btn);
+      container.appendChild(box);
+    }
+    if(item.score!==undefined && item.total!==undefined){
+      labels.push(item.title);
+      scores.push(((item.score/item.total)*100).toFixed(1));
     }
   });
 
-});
+  const ctx=document.getElementById('scoreChart').getContext('2d');
+  if(window.scoreLineChart) window.scoreLineChart.destroy();
+  window.scoreLineChart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:labels,
+      datasets:[{
+        label:'Score (%)',
+        data:scores,
+        borderColor:'#cc0000',
+        backgroundColor:'rgba(204,0,0,0.2)',
+        fill:true,
+        tension:0.3,
+        pointBackgroundColor:'#800000',
+        pointRadius:6
+      }]
+    },
+    options:{
+      scales:{y:{beginAtZero:true,max:100}}
+    }
+  });
+}
 </script>
+
+<footer>
+  © 2026 Mick Varona
+</footer>
 
 </body>
 </html>
