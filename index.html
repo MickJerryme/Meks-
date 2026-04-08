@@ -137,7 +137,6 @@ footer{color:white; margin-top:30px; text-align:center;}
   </div>
 </div>
 
-<!-- Image viewer -->
 <div id="viewer" class="viewer">
   <span class="close" onclick="closeViewer()">&times;</span>
   <img id="viewerImg">
@@ -150,17 +149,13 @@ footer{color:white; margin-top:30px; text-align:center;}
 <script>
 let chart;
 
-// Preload example images if not already in localStorage
+// Preload images in localStorage
 if(!localStorage.getItem('records')){
   const exampleData = [
-    {type: 'Quiz', title: 'Quiz 1', score: 16, total: 20, image: "micko
-/928f75d4-8e4d-4814-817e-12a0d6b4d73d.jpg"},
-    {type: 'Quiz', title: 'Quiz 2', score: 13, total: 20, image: "micko
-/3a9bbeb7-6628-48fd-ab09-165ca242ba45.jpg"},
-    {type: 'Quiz', title: 'Quiz 3', score: 4, total: 20, image: "micko
-/0fe16fb7-ae42-433e-a7d4-4fa9389134e6.jpg"},
-    {type: 'Activity', title: 'Lab 1', score: 75, total: 100, image: "micko
-/49c11c8b-e07d-4ebe-bb6c-1f7be3b9d507.jpg"}
+    {type: 'Quiz', title: 'Quiz 1', score: 18, total: 20, image: 'images/928f75d4-8e4d-4814-817e-12a0d6b4d73d.jpg'},
+    {type: 'Quiz', title: 'Quiz 2', score: 14, total: 20, image: 'images/3a9bbeb7-6628-48fd-ab09-165ca242ba45.jpg'},
+    {type: 'Quiz', title: 'Quiz 3', score: 5, total: 20, image: 'images/0fe16fb7-ae42-433e-a7d4-4fa9389134e6.jpg'},
+    {type: 'Activity', title: 'Lab 1', score: 88, total: 100, image: 'images/49c11c8b-e07d-4ebe-bb6c-1f7be3b9d507.jpg'}
   ];
   localStorage.setItem('records', JSON.stringify(exampleData));
 }
@@ -171,7 +166,6 @@ function showPage(id){
   if(id === "dashboard") loadDashboard();
 }
 
-// Image viewer
 function openViewer(src){
   document.getElementById("viewer").style.display = "flex";
   document.getElementById("viewerImg").src = src;
@@ -180,7 +174,6 @@ function closeViewer(){
   document.getElementById("viewer").style.display = "none";
 }
 
-// Handle uploads
 function saveUpload(formId, type){
   document.getElementById(formId).addEventListener('submit', function(e){
     e.preventDefault();
@@ -223,6 +216,8 @@ function loadDashboard(){
     if(item.image){
       let img = document.createElement("img");
       img.src = item.image;
+      img.alt = item.title;
+      img.title = item.title;
       img.onclick = () => openViewer(item.image);
       container.appendChild(img);
     }
@@ -235,25 +230,26 @@ function loadDashboard(){
   const ctx = document.getElementById("scoreChart").getContext('2d');
   if(chart) chart.destroy();
   chart = new Chart(ctx, {
-    type:'line',
+    type:'bar',
     data:{
       labels: labels,
       datasets:[{
         label:'Scores %',
         data: scores,
-        borderColor:'#10b981',
-        backgroundColor:'rgba(16,185,129,0.2)',
-        fill:true,
-        tension:0.3,
-        pointBackgroundColor:'#065f46',
-        pointRadius:6
+        backgroundColor:'#10b981',
+        borderColor:'#065f46',
+        borderWidth:1
       }]
     },
-    options:{ scales:{ y:{ min:0, max:100 } } }
+    options:{ 
+      scales:{ 
+        y:{ min:0, max:100, title:{display:true,text:'Percentage (%)'} },
+        x:{ title:{display:true,text:'Assessments'} }
+      }
+    }
   });
 }
 </script>
 
 </body>
-</html>
 </html>
