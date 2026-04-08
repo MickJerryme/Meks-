@@ -153,10 +153,10 @@ let chart;
 // Preload example images if not already in localStorage
 if(!localStorage.getItem('records')){
   const exampleData = [
-    {type: 'Quiz', title: 'Quiz 1', score: 16, total: 20, image: '928f75d4-8e4d-4814-817e-12a0d6b4d73d.jpg'},
-    {type: 'Quiz', title: 'Quiz 2', score: 13, total: 20, image: '3a9bbeb7-6628-48fd-ab09-165ca242ba45.jpg'},
-    {type: 'Quiz', title: 'Quiz 3', score: 4, total: 20, image: '0fe16fb7-ae42-433e-a7d4-4fa9389134e6.jpg'},
-    {type: 'Activity', title: 'Lab 1', score: 75, total: 100, image: '49c11c8b-e07d-4ebe-bb6c-1f7be3b9d507.jpg'}
+    {type: 'Quiz', title: 'Quiz 1', score: 16, total: 20, image: 'micko/928f75d4-8e4d-4814-817e-12a0d6b4d73d.jpg'},
+    {type: 'Quiz', title: 'Quiz 2', score: 13, total: 20, image: 'micko/3a9bbeb7-6628-48fd-ab09-165ca242ba45.jpg'},
+    {type: 'Quiz', title: 'Quiz 3', score: 4, total: 20, image: 'micko/0fe16fb7-ae42-433e-a7d4-4fa9389134e6.jpg'},
+    {type: 'Activity', title: 'Lab 1', score: 75, total: 100, image: 'micko/49c11c8b-e07d-4ebe-bb6c-1f7be3b9d507.jpg'}
   ];
   localStorage.setItem('records', JSON.stringify(exampleData));
 }
