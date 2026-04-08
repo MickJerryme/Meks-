@@ -7,97 +7,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-*{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
-body{background: linear-gradient(135deg,#000000 0%,#1a0000 40%,#660000 70%,#ff1a1a 100%); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px;}
-nav{width:100%; max-width:1200px; display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;}
-nav h2{color:white;}
-nav ul{list-style:none; display:flex; gap:30px;}
-nav ul li{color:white; cursor:pointer; transition:0.3s;}
-nav ul li:hover{color:#ff4d4d;}
-.page{display:none;}
-.active{display:block; width:100%;}
-.top-section{max-width:1200px; text-align:center; margin:auto; margin-bottom:40px;}
-.top-section h1{color:white; font-size:48px; margin-bottom:20px;}
-.tags{display:flex; justify-content:center; flex-wrap:wrap; gap:10px;}
-.tag{background:white; color:#b30000; padding:6px 14px; border-radius:20px; font-size:13px;}
-.card{width:100%; max-width:1000px; background:white; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.5); display:flex; flex-wrap:wrap; overflow:hidden; margin:20px auto; text-align:center;}
-.card-left{flex:1; min-width:250px; background:#111; display:flex; justify-content:center; align-items:center; padding:30px;}
-.profile-pic{width:160px; height:160px; border-radius:50%; border:5px solid white; object-fit:cover;}
-.card-right{flex:2; padding:30px;}
-.card-right h1{margin-bottom:15px;}
-.info{margin-bottom:10px;}
-.info span{font-weight:600; color:#b30000;}
-.about{margin-top:20px; background:#ffe6e6; padding:15px; border-radius:10px;}
-.section{background:white; padding:30px; border-radius:20px; box-shadow:0 15px 30px rgba(0,0,0,0.5); margin:20px auto; max-width:1100px; text-align:center;}
-.section h2{color:#b30000; margin-bottom:20px;}
-button{background:#cc0000; color:white; padding:10px; border:none; border-radius:8px; cursor:pointer;}
-button:hover{background:#ff1a1a;}
-form{display:flex; flex-direction:column; gap:10px;}
-input{padding:10px; border-radius:8px; border:1px solid #ccc;}
-#imageContainer{display:flex; flex-wrap:wrap; gap:15px; justify-content:center;}
-#imageContainer img{width:140px; border-radius:10px; cursor:pointer;}
-.viewer{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; justify-content:center; align-items:center; flex-direction:column; z-index:1000;}
-.viewer img{max-width:90%; max-height:80%;}
-.close{position:absolute; top:20px; right:30px; color:white; font-size:30px; cursor:pointer;}
-footer{color:white; margin-top:30px; text-align:center;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px;background:#022c22;color:white;}
+nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;margin-bottom:20px;}
+nav h2{font-size:28px;}
+nav div span{margin-left:20px;cursor:pointer;transition:0.2s;}
+nav div span:hover{color:#10b981;}
+.page{display:none;width:100%;max-width:1200px;position:relative;}
+.active{display:block;}
+.section,.card{max-width:900px;margin:20px auto;background:rgba(255,255,255,0.9);color:#065f46;padding:30px;border-radius:25px;text-align:center;transition:.3s;}
+.section:hover,.card:hover{transform:translateY(-8px);}
+.profile-pic{width:150px;height:150px;object-fit:cover;border-radius:50%;margin-bottom:15px;border:5px solid white;}
+#imageContainer{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
+#imageContainer img{width:150px;height:150px;object-fit:cover;border-radius:10px;cursor:pointer;}
+footer{color:white;margin-top:20px;text-align:center;font-size:14px;}
+footer a{margin:0 10px;color:#10b981;text-decoration:none;font-weight:600;transition:0.2s;}
+footer a:hover{color:white;text-decoration:underline;}
 </style>
 </head>
 <body>
 
 <nav>
   <h2>Portfolio</h2>
-  <ul>
-    <li onclick="showPage('home')">Home</li>
-    <li onclick="showPage('dashboard')">Dashboard</li>
-    <li onclick="showPage('uploadMenu')">Upload</li>
-  </ul>
+  <div>
+    <span onclick="showPage('home')">Home</span>
+    <span onclick="showPage('dashboard')">Dashboard</span>
+    <span onclick="showPage('uploadMenu')">Upload</span>
+  </div>
 </nav>
 
 <div id="home" class="page active">
-  <div class="top-section">
-    <h1>student <span>portfolio</span></h1>
-    <div class="tags">
-      <div class="tag">Listener</div>
-      <div class="tag">Eager</div>
-      <div class="tag">Teamwork</div>
-      <div class="tag">HTML</div>
-      <div class="tag">CSS</div>
-      <div class="tag">Java</div>
-    </div>
-  </div>
-
   <div class="card">
-    <div class="card-left">
-      <img src= "image/a7948dfb-0c85-4999-bc08-bf293de2b20e.jpg" class="profile-pic">
-    </div>
-
-    <div class="card-right">
-      <h1>Hello Good Day!</h1>
-      <div class="info"><span>Name:</span> Mick Jerryme Mhier M. Varona</div>
-      <div class="info"><span>Student No:</span> 251100192</div>
-      <div class="info"><span>Course & Section:</span> BSCS-1D</div>
-      <div class="about">
-        I want to be a fully pledge developer in the future
-      </div>
+    <img src="image/18f1c448-e3c2-40ff-b46e-d916772600f9.jpg" class="profile-pic" alt="Profile">
+    <h2>Mick Jerryme Mhier M. Varona</h2>
+    <div class="info"><strong>Student No:</strong> 251100192</div>
+    <div class="info"><strong>Course & Section:</strong> BSCS-1D</div>
+    <div class="about">
+      I want to be a fully pledged developer in the future.
     </div>
   </div>
 </div>
 
 <div id="dashboard" class="page">
   <div class="section">
-    <h2>Dashboard</h2>
-    <canvas id="scoreChart" style="width:100%;max-width:900px;height:400px;"></canvas>
+    <canvas id="scoreChart"></canvas>
   </div>
-
-  <div class="section">
-    <h2>Uploaded Proof</h2>
-    <div id="imageContainer"></div>
-  </div>
+  <div class="section" id="imageContainer"></div>
 </div>
 
 <div id="uploadMenu" class="page">
   <div class="section">
-    <h2>Upload</h2>
     <button onclick="showPage('quizPage')">Quiz Upload</button><br><br>
     <button onclick="showPage('labPage')">Lab Work Upload</button><br><br>
     <button onclick="showPage('examPage')">Major Exam Upload</button>
@@ -106,7 +65,6 @@ footer{color:white; margin-top:30px; text-align:center;}
 
 <div id="quizPage" class="page">
   <div class="section">
-    <h2>Quiz Upload</h2>
     <form id="quizForm">
       <input type="text" placeholder="Quiz Title" required>
       <input type="file" accept="image/*" required>
@@ -117,9 +75,8 @@ footer{color:white; margin-top:30px; text-align:center;}
 
 <div id="labPage" class="page">
   <div class="section">
-    <h2>Lab Work Upload</h2>
     <form id="labForm">
-      <input type="text" placeholder="Title / Description" required>
+      <input type="text" placeholder="Lab Title" required>
       <input type="file" accept="image/*" required>
       <button type="submit">Submit</button>
     </form>
@@ -128,7 +85,6 @@ footer{color:white; margin-top:30px; text-align:center;}
 
 <div id="examPage" class="page">
   <div class="section">
-    <h2>Major Exam Upload</h2>
     <form id="examForm">
       <input type="text" placeholder="Exam Title" required>
       <input type="file" accept="image/*" required>
@@ -137,19 +93,12 @@ footer{color:white; margin-top:30px; text-align:center;}
   </div>
 </div>
 
-<div id="viewer" class="viewer">
-  <span class="close" onclick="closeViewer()">&times;</span>
-  <img id="viewerImg">
-</div>
-
 <footer>
   © 2026 Mick Varona
 </footer>
 
 <script>
-let chart;
-
-// Preload images in localStorage
+// Preload images in localStorage if empty
 if(!localStorage.getItem('records')){
   const exampleData = [
     {type: 'Quiz', title: 'Quiz 1', score: 18, total: 20, image: 'image/18f1c448-e3c2-40ff-b46e-d916772600f9.jpg'},
@@ -160,93 +109,67 @@ if(!localStorage.getItem('records')){
   localStorage.setItem('records', JSON.stringify(exampleData));
 }
 
-function showPage(id){
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  if(id === "dashboard") loadDashboard();
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  if(pageId==='dashboard') updateDashboard();
 }
 
-function openViewer(src){
-  document.getElementById("viewer").style.display = "flex";
-  document.getElementById("viewerImg").src = src;
-}
-function closeViewer(){
-  document.getElementById("viewer").style.display = "none";
-}
-
-function saveUpload(formId, type){
-  document.getElementById(formId).addEventListener('submit', function(e){
+// Handle uploads
+function saveUpload(formId,type){
+  document.getElementById(formId).addEventListener('submit',function(e){
     e.preventDefault();
-    let title = this.querySelector('input[type=text]').value;
-    let imageFile = this.querySelector('input[type=file]').files[0];
-    let reader = new FileReader();
-    reader.onload = () => {
-      let imageData = reader.result;
-      let score = prompt('Enter score:');
-      let total = prompt('Enter total:');
-      let data = JSON.parse(localStorage.getItem('records')) || [];
-      data.push({type, title, score: Number(score), total: Number(total), image: imageData});
-      localStorage.setItem('records', JSON.stringify(data));
-      alert(type + ' saved!');
+    let title=this.querySelector('input[type=text]').value;
+    let imageFile=this.querySelector('input[type=file]').files[0];
+    let reader=new FileReader();
+    reader.onload=()=>{
+      let imageData=reader.result;
+      let score=prompt('Enter score:');
+      let total=prompt('Enter total:');
+      let data=JSON.parse(localStorage.getItem('records'))||[];
+      data.push({type,title,score:Number(score),total:Number(total),image:imageData});
+      localStorage.setItem('records',JSON.stringify(data));
+      alert(type+' saved!');
       this.reset();
-      loadDashboard();
+      updateDashboard();
     };
     if(imageFile) reader.readAsDataURL(imageFile);
   });
 }
 
-saveUpload('quizForm', 'Quiz');
-saveUpload('labForm', 'Activity');
-saveUpload('examForm', 'Exam');
+saveUpload('quizForm','Quiz');
+saveUpload('labForm','Activity');
+saveUpload('examForm','Exam');
 
-function deleteItem(index){
-  let data = JSON.parse(localStorage.getItem('records')) || [];
-  data.splice(index, 1);
-  localStorage.setItem('records', JSON.stringify(data));
-  loadDashboard();
-}
+// Update dashboard with images and bar chart
+function updateDashboard(){
+  let data=JSON.parse(localStorage.getItem('records'))||[];
+  let container=document.getElementById('imageContainer');
+  container.innerHTML='';
+  let labels=[], scores=[];
 
-function loadDashboard(){
-  let data = JSON.parse(localStorage.getItem('records')) || [];
-  let container = document.getElementById("imageContainer");
-  container.innerHTML = '';
-  let labels = [], scores = [];
-
-  data.forEach((item, index) => {
+  data.forEach(item=>{
     if(item.image){
-      let img = document.createElement("img");
-      img.src = item.image;
-      img.alt = item.title;
-      img.title = item.title;
-      img.onclick = () => openViewer(item.image);
+      let img=document.createElement('img');
+      img.src=item.image;
+      img.alt=item.title;
       container.appendChild(img);
     }
-    if(item.score !== undefined && item.total !== undefined){
+    if(item.score!==undefined && item.total!==undefined){
       labels.push(item.title);
       scores.push(((item.score/item.total)*100).toFixed(1));
     }
   });
 
-  const ctx = document.getElementById("scoreChart").getContext('2d');
-  if(chart) chart.destroy();
-  chart = new Chart(ctx, {
+  const ctx=document.getElementById('scoreChart').getContext('2d');
+  if(window.chart) window.chart.destroy();
+  window.chart=new Chart(ctx,{
     type:'bar',
     data:{
-      labels: labels,
-      datasets:[{
-        label:'Scores %',
-        data: scores,
-        backgroundColor:'#10b981',
-        borderColor:'#065f46',
-        borderWidth:1
-      }]
+      labels:labels,
+      datasets:[{label:'Score (%)', data:scores, backgroundColor:'#cc0000'}]
     },
-    options:{ 
-      scales:{ 
-        y:{ min:0, max:100, title:{display:true,text:'Percentage (%)'} },
-        x:{ title:{display:true,text:'Assessments'} }
-      }
-    }
+    options:{scales:{y:{beginAtZero:true,max:100}}}
   });
 }
 </script>
