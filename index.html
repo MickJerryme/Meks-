@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
 body{background: linear-gradient(135deg,#000000 0%,#1a0000 40%,#660000 70%,#ff1a1a 100%); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px;}
@@ -21,7 +20,7 @@ nav ul li:hover{color:#ff4d4d;}
 .top-section h1{color:white; font-size:48px; margin-bottom:20px;}
 .tags{display:flex; justify-content:center; flex-wrap:wrap; gap:10px;}
 .tag{background:white; color:#b30000; padding:6px 14px; border-radius:20px; font-size:13px;}
-.card{width:100%; max-width:1000px; background:white; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.5); display:flex; flex-wrap:wrap; overflow:hidden;}
+.card{width:100%; max-width:1000px; background:white; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.5); display:flex; flex-wrap:wrap; overflow:hidden; margin:20px auto; text-align:center;}
 .card-left{flex:1; min-width:250px; background:#111; display:flex; justify-content:center; align-items:center; padding:30px;}
 .profile-pic{width:160px; height:160px; border-radius:50%; border:5px solid white; object-fit:cover;}
 .card-right{flex:2; padding:30px;}
@@ -29,19 +28,20 @@ nav ul li:hover{color:#ff4d4d;}
 .info{margin-bottom:10px;}
 .info span{font-weight:600; color:#b30000;}
 .about{margin-top:20px; background:#ffe6e6; padding:15px; border-radius:10px;}
-.section{background:white; padding:30px; border-radius:20px; box-shadow:0 15px 30px rgba(0,0,0,0.5); margin:20px auto; max-width:1100px;}
+.section{background:white; padding:30px; border-radius:20px; box-shadow:0 15px 30px rgba(0,0,0,0.5); margin:20px auto; max-width:1100px; text-align:center;}
 .section h2{color:#b30000; margin-bottom:20px;}
 button{background:#cc0000; color:white; padding:10px; border:none; border-radius:8px; cursor:pointer;}
 button:hover{background:#ff1a1a;}
 form{display:flex; flex-direction:column; gap:10px;}
 input{padding:10px; border-radius:8px; border:1px solid #ccc;}
-#imageContainer{display:flex; flex-wrap:wrap; gap:15px;}
-#imageContainer div{display:flex; flex-direction:column; align-items:center;}
-#imageContainer img{width:140px; border-radius:10px;}
-footer{color:white; margin-top:30px;}
+#imageContainer{display:flex; flex-wrap:wrap; gap:15px; justify-content:center;}
+#imageContainer img{width:140px; border-radius:10px; cursor:pointer;}
+.viewer{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; justify-content:center; align-items:center; flex-direction:column; z-index:1000;}
+.viewer img{max-width:90%; max-height:80%;}
+.close{position:absolute; top:20px; right:30px; color:white; font-size:30px; cursor:pointer;}
+footer{color:white; margin-top:30px; text-align:center;}
 </style>
 </head>
-
 <body>
 
 <nav>
@@ -68,8 +68,7 @@ footer{color:white; margin-top:30px;}
 
   <div class="card">
     <div class="card-left">
-      <img src="micko/949b8043-5382-4f76-a947-b69d1757ff18.jpg
-" class="profile-pic">
+      <img src="micko/949b8043-5382-4f76-a947-b69d1757ff18.jpg" class="profile-pic">
     </div>
 
     <div class="card-right">
@@ -110,7 +109,6 @@ footer{color:white; margin-top:30px;}
     <h2>Quiz Upload</h2>
     <form id="quizForm">
       <input type="text" placeholder="Quiz Title" required>
-      <input type="file" required>
       <input type="file" accept="image/*" required>
       <button type="submit">Submit</button>
     </form>
@@ -122,7 +120,6 @@ footer{color:white; margin-top:30px;}
     <h2>Lab Work Upload</h2>
     <form id="labForm">
       <input type="text" placeholder="Title / Description" required>
-      <input type="file" required>
       <input type="file" accept="image/*" required>
       <button type="submit">Submit</button>
     </form>
@@ -134,107 +131,125 @@ footer{color:white; margin-top:30px;}
     <h2>Major Exam Upload</h2>
     <form id="examForm">
       <input type="text" placeholder="Exam Title" required>
-      <input type="file" required>
+      <input type="file" accept="image/*" required>
       <button type="submit">Submit</button>
     </form>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-function showPage(pageId){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-  if(pageId==='dashboard'){ updateDashboard(); }
-}
-
-function saveUpload(formId,type){
-  document.getElementById(formId).addEventListener('submit',function(e){
-    e.preventDefault();
-    let title=this.querySelector('input[type=text]').value;
-    let imageFile=this.querySelectorAll('input[type=file]')[1]?.files[0];
-    let reader=new FileReader();
-    reader.onload=()=>{
-      let imageData=reader.result;
-      let score=prompt('Enter score:');
-      let total=prompt('Enter total:');
-      let data=JSON.parse(localStorage.getItem('records'))||[];
-      data.push({type,title,score:Number(score),total:Number(total),image:imageData});
-      localStorage.setItem('records',JSON.stringify(data));
-      alert(type+' saved!');
-      this.reset();
-    };
-    if(imageFile) reader.readAsDataURL(imageFile);
-  });
-}
-
-saveUpload('quizForm','Quiz');
-saveUpload('labForm','Activity');
-saveUpload('examForm','Exam');
-
-function deleteItem(index){
-  let data=JSON.parse(localStorage.getItem('records'))||[];
-  data.splice(index,1);
-  localStorage.setItem('records',JSON.stringify(data));
-  updateDashboard();
-}
-
-function updateDashboard(){
-  let data=JSON.parse(localStorage.getItem('records'))||[];
-  let container=document.getElementById('imageContainer');
-  container.innerHTML='';
-  let labels=[],scores=[];
-  data.forEach((item,index)=>{
-    if(item.type==='Activity' && index===data.findIndex(d=>d.type==='Activity')) return;
-    if(item.image){
-      let box=document.createElement('div');
-      let img=document.createElement('img');
-      img.src=item.image;
-      let label=document.createElement('p');
-      label.innerText=item.title;
-      label.style.textAlign='center';
-      let btn=document.createElement('button');
-      btn.innerText='Delete';
-      btn.onclick=()=>deleteItem(index);
-      box.appendChild(img);
-      box.appendChild(label);
-      box.appendChild(btn);
-      container.appendChild(box);
-    }
-    if(item.score!==undefined && item.total!==undefined){
-      labels.push(item.title);
-      scores.push(((item.score/item.total)*100).toFixed(1));
-    }
-  });
-
-  const ctx=document.getElementById('scoreChart').getContext('2d');
-  if(window.scoreLineChart) window.scoreLineChart.destroy();
-  window.scoreLineChart=new Chart(ctx,{
-    type:'line',
-    data:{
-      labels:labels,
-      datasets:[{
-        label:'Score (%)',
-        data:scores,
-        borderColor:'#cc0000',
-        backgroundColor:'rgba(204,0,0,0.2)',
-        fill:true,
-        tension:0.3,
-        pointBackgroundColor:'#800000',
-        pointRadius:6
-      }]
-    },
-    options:{
-      scales:{y:{beginAtZero:true,max:100}}
-    }
-  });
-}
-</script>
+<!-- Image viewer -->
+<div id="viewer" class="viewer">
+  <span class="close" onclick="closeViewer()">&times;</span>
+  <img id="viewerImg">
+</div>
 
 <footer>
   © 2026 Mick Varona
 </footer>
 
+<script>
+let chart;
+
+// Preload example images if not already in localStorage
+if(!localStorage.getItem('records')){
+  const exampleData = [
+    {type: 'Quiz', title: 'Quiz 1', score: 16, total: 20, image: '928f75d4-8e4d-4814-817e-12a0d6b4d73d.jpg'},
+    {type: 'Quiz', title: 'Quiz 2', score: 13, total: 20, image: '3a9bbeb7-6628-48fd-ab09-165ca242ba45.jpg'},
+    {type: 'Quiz', title: 'Quiz 3', score: 4, total: 20, image: '0fe16fb7-ae42-433e-a7d4-4fa9389134e6.jpg'},
+    {type: 'Activity', title: 'Lab 1', score: 75, total: 100, image: '49c11c8b-e07d-4ebe-bb6c-1f7be3b9d507.jpg'}
+  ];
+  localStorage.setItem('records', JSON.stringify(exampleData));
+}
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  if(id === "dashboard") loadDashboard();
+}
+
+// Image viewer
+function openViewer(src){
+  document.getElementById("viewer").style.display = "flex";
+  document.getElementById("viewerImg").src = src;
+}
+function closeViewer(){
+  document.getElementById("viewer").style.display = "none";
+}
+
+// Handle uploads
+function saveUpload(formId, type){
+  document.getElementById(formId).addEventListener('submit', function(e){
+    e.preventDefault();
+    let title = this.querySelector('input[type=text]').value;
+    let imageFile = this.querySelector('input[type=file]').files[0];
+    let reader = new FileReader();
+    reader.onload = () => {
+      let imageData = reader.result;
+      let score = prompt('Enter score:');
+      let total = prompt('Enter total:');
+      let data = JSON.parse(localStorage.getItem('records')) || [];
+      data.push({type, title, score: Number(score), total: Number(total), image: imageData});
+      localStorage.setItem('records', JSON.stringify(data));
+      alert(type + ' saved!');
+      this.reset();
+      loadDashboard();
+    };
+    if(imageFile) reader.readAsDataURL(imageFile);
+  });
+}
+
+saveUpload('quizForm', 'Quiz');
+saveUpload('labForm', 'Activity');
+saveUpload('examForm', 'Exam');
+
+function deleteItem(index){
+  let data = JSON.parse(localStorage.getItem('records')) || [];
+  data.splice(index, 1);
+  localStorage.setItem('records', JSON.stringify(data));
+  loadDashboard();
+}
+
+function loadDashboard(){
+  let data = JSON.parse(localStorage.getItem('records')) || [];
+  let container = document.getElementById("imageContainer");
+  container.innerHTML = '';
+  let labels = [], scores = [];
+
+  data.forEach((item, index) => {
+    if(item.image){
+      let img = document.createElement("img");
+      img.src = item.image;
+      img.onclick = () => openViewer(item.image);
+      container.appendChild(img);
+    }
+    if(item.score !== undefined && item.total !== undefined){
+      labels.push(item.title);
+      scores.push(((item.score/item.total)*100).toFixed(1));
+    }
+  });
+
+  const ctx = document.getElementById("scoreChart").getContext('2d');
+  if(chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type:'line',
+    data:{
+      labels: labels,
+      datasets:[{
+        label:'Scores %',
+        data: scores,
+        borderColor:'#10b981',
+        backgroundColor:'rgba(16,185,129,0.2)',
+        fill:true,
+        tension:0.3,
+        pointBackgroundColor:'#065f46',
+        pointRadius:6
+      }]
+    },
+    options:{ scales:{ y:{ min:0, max:100 } } }
+  });
+}
+</script>
+
 </body>
+</html>
 </html>
