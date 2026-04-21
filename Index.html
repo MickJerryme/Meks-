@@ -3,92 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Dashboard</title>
+    <title>Simple Calculator</title>
     <style>
-        /* Simple Theme */
-        body { font-family: sans-serif; transition: 0.3s; padding: 20px; text-align: center; }
-        .dark-mode { background: #222; color: white; }
-        
-        /* Dashboard Card */
-        .card {
-            border: 1px solid #ccc;
-            padding: 20px;
-            max-width: 400px;
-            margin: 20px auto;
-            border-radius: 8px;
+        body { 
+            font-family: sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: #f0f2f5; 
+            transition: 0.3s;
         }
 
-        /* The Calculator Section */
-        #calc-section {
-            margin-top: 500px; /* Space to show the "Jump" effect */
-            padding: 40px;
-            border-top: 2px solid #eee;
+        .calc-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 280px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            text-decoration: none; /* Removes underline from href */
-            border-radius: 5px;
-            margin: 10px;
-            cursor: pointer;
+        input { 
+            width: 90%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            font-size: 16px;
+            box-sizing: border-box;
         }
 
-        input { padding: 10px; margin: 5px; width: 80px; }
+        .btn-group { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            margin-top: 10px; 
+        }
+
+        button { 
+            padding: 12px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 8px; 
+            background: #007bff; 
+            color: white; 
+            font-size: 18px; 
+            font-weight: bold;
+        }
+
+        button:active { transform: scale(0.95); }
+
+        #res { 
+            margin-top: 20px; 
+            font-size: 22px; 
+            color: #333; 
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .theme-btn {
+            background: #6c757d;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 12px;
+            padding: 8px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>Calculator De letche</h1>
-        <p>Lab Act #2:</p>
+    <div class="calc-card">
+        <h2 style="margin: 0 0 15px 0;">Calculator</h2>
         
-        <a href="#calc-section" class="btn">Go to Calculator</a>
+        <input type="number" id="n1" placeholder="First Number">
+        <input type="number" id="n2" placeholder="Second Number">
         
-        <br>
-        <button onclick="document.body.classList.toggle('dark-mode')">Toggle Dark Mode</button>
-        <button id="alertBtn" onclick="toggleAlert()">Alert: ON</button>
-    </div>
-
-    <div id="calc-section">
-        <h2>Simple Input Calculator</h2>
-        <input type="number" id="n1" placeholder="Num 1">
-        <input type="number" id="n2" placeholder="Num 2">
-        <br>
-        <button onclick="calc('+')">Add</button>
-        <button onclick="calc('-')">Sub</button>
-        <button onclick="calc('*')">Mul</button>
-        <button onclick="calc('/')">Div</button>
+        <div class="btn-group">
+            <button onclick="calc('+')">+</button>
+            <button onclick="calc('-')">-</button>
+            <button onclick="calc('*')">×</button>
+            <button onclick="calc('/')">÷</button>
+        </div>
         
         <h3 id="res">Result: 0</h3>
         
-        <a href="#" style="color: gray; font-size: 12px;">Back to Top</a>
+        <button class="theme-btn" onclick="toggleTheme()">Toggle Dark Mode</button>
     </div>
 
     <script>
-        let alertsActive = true;
+        // THE ALERT LOGIG
+        window.addEventListener('offline', () => {
+            alert("Status: You are currently OFFLINE!");
+        });
+
+        window.addEventListener('online', () => {
+            alert("Status: You are back ONLINE!");
+        });
 
         function calc(op) {
             const a = parseFloat(document.getElementById('n1').value);
             const b = parseFloat(document.getElementById('n2').value);
             let r = 0;
+
+            if (isNaN(a) || isNaN(b)) {
+                document.getElementById('res').innerText = "Enter numbers!";
+                return;
+            }
+
             if (op === '+') r = a + b;
             if (op === '-') r = a - b;
             if (op === '*') r = a * b;
-            if (op === '/') r = b !== 0 ? a / b : "Error";
+            if (op === '/') r = b !== 0 ? (a / b).toFixed(2) : "Error";
+
             document.getElementById('res').innerText = "Result: " + r;
         }
 
-        function toggleAlert() {
-            alertsActive = !alertsActive;
-            document.getElementById('alertBtn').innerText = alertsActive ? "Alert: ON" : "Alert: OFF";
+        function toggleTheme() {
+            const body = document.body;
+            if (body.style.backgroundColor === 'rgb(34, 34, 34)') {
+                body.style.backgroundColor = '#f0f2f5';
+                body.style.color = 'black';
+            } else {
+                body.style.backgroundColor = '#222';
+                body.style.color = 'white';
+            }
         }
-
-        window.addEventListener('offline', () => {
-            if (alertsActive) alert("You are offline!");
-        });
     </script>
 </body>
 </html>
