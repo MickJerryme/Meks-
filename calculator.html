@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Dashboard</title>
+    <style>
+        /* Simple Theme */
+        body { font-family: sans-serif; transition: 0.3s; padding: 20px; text-align: center; }
+        .dark-mode { background: #222; color: white; }
+        
+        /* Dashboard Card */
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 8px;
+        }
+
+        /* The Calculator Section */
+        #calc-section {
+            margin-top: 500px; /* Space to show the "Jump" effect */
+            padding: 40px;
+            border-top: 2px solid #eee;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none; /* Removes underline from href */
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        input { padding: 10px; margin: 5px; width: 80px; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>My Dashboard</h1>
+        <p>Check out my latest tool:</p>
+        
+        <a href="#calc-section" class="btn">Go to Calculator</a>
+        
+        <br>
+        <button onclick="document.body.classList.toggle('dark-mode')">Toggle Dark Mode</button>
+        <button id="alertBtn" onclick="toggleAlert()">Alert: ON</button>
+    </div>
+
+    <div id="calc-section">
+        <h2>Simple Input Calculator</h2>
+        <input type="number" id="n1" placeholder="Num 1">
+        <input type="number" id="n2" placeholder="Num 2">
+        <br>
+        <button onclick="calc('+')">Add</button>
+        <button onclick="calc('-')">Sub</button>
+        <button onclick="calc('*')">Mul</button>
+        <button onclick="calc('/')">Div</button>
+        
+        <h3 id="res">Result: 0</h3>
+        
+        <a href="#" style="color: gray; font-size: 12px;">Back to Top</a>
+    </div>
+
+    <script>
+        let alertsActive = true;
+
+        function calc(op) {
+            const a = parseFloat(document.getElementById('n1').value);
+            const b = parseFloat(document.getElementById('n2').value);
+            let r = 0;
+            if (op === '+') r = a + b;
+            if (op === '-') r = a - b;
+            if (op === '*') r = a * b;
+            if (op === '/') r = b !== 0 ? a / b : "Error";
+            document.getElementById('res').innerText = "Result: " + r;
+        }
+
+        function toggleAlert() {
+            alertsActive = !alertsActive;
+            document.getElementById('alertBtn').innerText = alertsActive ? "Alert: ON" : "Alert: OFF";
+        }
+
+        window.addEventListener('offline', () => {
+            if (alertsActive) alert("You are offline!");
+        });
+    </script>
+</body>
+</html>
