@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px;background:#022c22;color:white;}
+nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;margin-bottom:20px;}
+nav h2{font-size:28px;}
+nav div span{margin-left:20px;cursor:pointer;transition:0.2s;}
+nav div span:hover{color:#10b981;}
+.page{display:none;width:100%;max-width:1200px;position:relative;}
+.active{display:block;}
+.section,.card{max-width:900px;margin:20px auto;background:rgba(255,255,255,0.9);color:#065f46;padding:30px;border-radius:25px;text-align:center;transition:.3s;}
+.section:hover,.card:hover{transform:translateY(-8px);}
+.profile-pic{width:150px;height:150px;object-fit:cover;border-radius:50%;margin-bottom:15px;border:5px solid white;}
+
+/* Grid Gallery Styles */
+#imageContainer{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
+.gallery-card{background:#047857;color:white;padding:15px;border-radius:15px;text-align:center;width:180px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+.gallery-card img{width:150px;height:150px;object-fit:cover;border-radius:10px;cursor:pointer;border:2px solid rgba(255,255,255,0.2);}
+.gallery-card h4{font-size:16px;margin:8px 0 2px 0;}
+.gallery-card p{font-size:12px;opacity:0.9;}
+
+footer{color:white;margin-top:20px;text-align:center;font-size:14px;}
+footer a{margin:0 10px;color:#10b981;text-decoration:none;font-weight:600;transition:0.2s;}
+footer a:hover{color:white;text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav>
+  <h2>Portfolio</h2>
+  <div>
+    <span onclick="showPage('home')">Home</span>
+    <span onclick="showPage('dashboard')">Dashboard</span>
+    <span onclick="showPage('uploadMenu')">Upload</span>
+  </div>
+</nav>
+
+<div id="home" class="page active">
+  <div class="card">
+    <img src="31fabcc9-4651-4ddb-9b7a-268667e109e8.jpg" class="profile-pic" alt="Profile">
+    <h2>Mick Jerryme Mhier M. Varona</h2>
+    <div class="info"><strong>Student No:</strong> 251100192</div>
+    <div class="info"><strong>Course & Section:</strong> BSCS-1D</div>
+    <div class="about">
+      I want to be a fully pledged developer in the future.
+    </div>
+  </div>
+</div>
+
+<div id="dashboard" class="page">
+  <div class="section">
+    <canvas id="scoreChart"></canvas>
+  </div>
+  
+  <div class="section" id="imageContainer">
+    
+    <div class="gallery-card" data-title="Quiz 1" data-score="18" data-total="20">
+      <img src="89c754c4-cc20-4301-911f-9afdf9595c9e.jpg" alt="Quiz 1">
+      <h4>Quiz 1</h4>
+      <p>Score: 16/20</p>
+    </div>
+
+    <div class="gallery-card" data-title="Quiz 2" data-score="14" data-total="20">
+      <img src="88c92542-5d13-4246-a958-a67732324ff0.jpg" alt="Quiz 2">
+      <h4>Quiz 2</h4>
+      <p>Score: 13/20</p>
+    </div>
+
+    <div class="gallery-card" data-title="Quiz 3" data-score="5" data-total="20">
+      <img src="49c4c2ec-b520-419a-8841-650f3d1d677d.jpg" alt="Quiz 3">
+      <h4>Quiz 3</h4>
+      <p>Score: 4/20</p>
+    </div>
+
+     <div class="gallery-card" data-title="Long Quiz" data-score="43" data-total="45">
+      <img src="5e198c19-57ea-4dfe-944f-ad1c070360f0.jpg" alt="Long Quiz">
+      <h4>Long Quiz Midterms</h4>
+      <p>Score: 43/45</p>
+    </div>
+
+     <div class="gallery-card" data-title="Quiz 1" data-score="5" data-total="20">
+      <img src="d3ad8474-c57d-4a01-a0da-00e324505a0f.jpg" alt="Quiz 3">
+      <h4>Final Quiz 1</h4>
+      <p>Score: 19/20</p>
+    </div>
+
+    <div class="gallery-card" data-title="Quiz 2" data-score="5" data-total="20">
+      <img src="bbf046a7-4d54-4707-9fe1-2d9e8902dbc4.jpg" alt="Quiz 3">
+      <h4>Final Quiz 2</h4>
+      <p>Score: 20/20</p>
+    </div>
+
+    <div class="gallery-card" data-title="Long Quiz" data-score="43" data-total="45">
+      <img src="f839c53d-ec02-4d80-b01a-55e95fb62a1f.jpg" alt="Long Quiz">
+      <h4>Long Quiz Finals</h4>
+      <p>Score: 39/40</p>
+    </div>
+
+    <div class="gallery-card" data-title="Lab 1" data-score="75" data-total="100">
+      <img src="8f98d747-ff46-4980-9f66-44321d95555b.jpg" alt="Lab 1">
+      <h4>Lab 1</h4>
+      <p>Score: 75/100</p>
+    </div>
+
+     <div class="gallery-card" data-title="Midterms" data-score="24" data-total="70">
+      <img src="4de21ee7-2303-43e7-9dfc-0f787d565e69.jpg" alt="Long Quiz">
+      <h4>Midterms Exam</h4>
+      <p>Score: 24/70</p>
+    </div>
+
+
+
+  </div>
+</div>
+
+<div id="uploadMenu" class="page">
+  <div class="section">
+    <p style="margin-bottom: 15px; font-weight: 600;">Static Mode: Edit your HTML file directly to permanently add new records.</p>
+    <button onclick="showPage('quizPage')">Quiz Upload View</button><br><br>
+    <button onclick="showPage('labPage')">Lab Work Upload View</button><br><br>
+    <button onclick="showPage('examPage')">Major Exam Upload View</button>
+  </div>
+</div>
+
+<div id="quizPage" class="page"><div class="section"><form id="quizForm"><input type="text" placeholder="Quiz Title" required><input type="file" accept="image/*" required><button type="submit">Submit</button></form></div></div>
+<div id="labPage" class="page"><div class="section"><form id="labForm"><input type="text" placeholder="Lab Title" required><input type="file" accept="image/*" required><button type="submit">Submit</button></form></div></div>
+<div id="examPage" class="page"><div class="section"><form id="examForm"><input type="text" placeholder="Exam Title" required><input type="file" accept="image/*" required><button type="submit">Submit</button></form></div></div>
+
+<footer>
+<a href="https://mickjerryme.github.io/Owt/" target="_blank">Open My Calculator</a>
+</footer>
+
+<script>
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  if(pageId==='dashboard') updateChart();
+}
+
+// Chart mapping engine reads straight from your HTML blocks
+function updateChart(){
+  let labels = [];
+  let scores = [];
+  
+  // Find all cards explicitly written into your HTML container
+  const cards = document.querySelectorAll('#imageContainer .gallery-card');
+  
+  cards.forEach(card => {
+    let title = card.getAttribute('data-title');
+    let score = Number(card.getAttribute('data-score'));
+    let total = Number(card.getAttribute('data-total'));
+    
+    if(title && !isNaN(score) && !isNaN(total)){
+      labels.push(title);
+      scores.push(((score / total) * 100).toFixed(1));
+    }
+  });
+
+  const ctx = document.getElementById('scoreChart').getContext('2d');
+  if(window.chart) window.chart.destroy();
+  window.chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{label: 'Score (%)', data: scores, backgroundColor: '#10b981'}]
+    },
+    options: {scales: {y: {beginAtZero: true, max: 100}}}
+  });
+}
+
+// Initialize chart layout on load setup
+window.addEventListener('DOMContentLoaded', () => {
+  if(document.getElementById('dashboard').classList.contains('active')) {
+    updateChart();
+  }
+});
+</script>
+
+</body>
+</html>
